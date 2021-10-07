@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class BrandDestroyRequest extends FormRequest
+class BrandNameUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class BrandDestroyRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class BrandDestroyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:25', 'min:2', Rule::unique('brands', 'name')->ignore($this->route()->parameter('brand'))]
         ];
     }
 }

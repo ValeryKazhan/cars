@@ -34,25 +34,25 @@ class DatabaseSeeder extends Seeder
             'created_by' => $admin->id
         ]);
 
-        $a6 = Car::create([
+        Car::create([
            'brand_id' => $audi->id,
            'name' => 'a6',
             'created_by' => $admin->id
         ]);
 
-        $r8 = Car::create([
+        Car::create([
             'brand_id' => $audi->id,
             'name' => 'r8',
             'created_by' => $admin->id
         ]);
 
-        $corsa = Car::create([
+        Car::create([
             'brand_id' => $opel->id,
             'name' => 'Corsa',
             'created_by' => $admin->id
         ]);
 
-        $astra = Car::create([
+        Car::create([
             'brand_id' => $opel->id,
             'name' => 'Astra',
             'created_by' => $admin->id

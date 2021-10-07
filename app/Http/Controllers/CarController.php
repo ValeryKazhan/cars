@@ -2,32 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\CarNameUpdateRequest;
+use App\Http\Requests\CarStoreRequest;
 use App\Models\Car;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\JsonResponse;
 
 class CarController extends Controller
 {
-    public function store(Request $request) : JsonResponse
+    public function store(CarStoreRequest $request) : JsonResponse
     {
-        $attributes = $request->validate([
-            'brand_id' => ['required', Rule::exists('brands', 'id')],
-            'name' => ['required', 'max:25', Rule::unique('cars', 'name')]
-        ]);
-        return Car::create($attributes)->toJson();
+        return response()->json(Car::create($request->all()));
     }
 
-    public function update(Car $car, Request $request): JsonResponse
+    public function update(Car $car, CarNameUpdateRequest $request): JsonResponse
     {
-        $attributes = $request->validate([
-            'name' => ['required', 'max:25', Rule::unique('cars', 'name')->ignore($car->id)]
-        ]);
-        return $car->update([$attributes])->toJson();
+        $car->update(['name' => $request->get('name')]);
+        return response()->json($car);
     }
 
     public function destroy (Car $car){
-        $car->delete();
+        return $car->delete();
     }
 
 }

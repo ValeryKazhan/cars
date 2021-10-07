@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -30,7 +28,6 @@ class UserController extends Controller
                     ]
                 ]);
         }
-
         $user = User::query()->where('email', $request->email)->first();
         return response()->json(['message' => $user->createToken('auth-token')->plainTextToken]);
     }
